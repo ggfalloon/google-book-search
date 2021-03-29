@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Navbar() {
     return (
         <nav className="navbar fixed-top navbar-expand-md navbar-dark">
-            <div class="container-fluid">
+            <div className="container-fluid">
 
                 <Link className="navbar-brand left-nav" to="/">Google Books</Link>
 
@@ -30,7 +30,6 @@ function Navbar() {
                     </ul>
                 </div>
             </div>
-
         </nav>
     );
 }

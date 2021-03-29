@@ -1,18 +1,23 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from "./components/Navbar";
-import Jumbotron from "./components/Jumbotron";
-import './App.css';
+import Search from "./pages/Search";
+import Saved from "./pages/Saved";
 
 function App() {
   return (
     <Router>
-      <Navbar />
-      <Jumbotron>
-        <h1>(React) Google Books Search</h1>
-        <h4>Search for and Save Books of Interest</h4>
-      </Jumbotron>
-
+      <div className="container">
+        <Navbar />
+        <Switch>
+          <Route exact path={["/", "/search"]}>
+            <Search />
+          </Route>
+          <Route exact path="/saved">
+            <Saved />
+          </Route>
+        </Switch>
+      </div>
     </Router>
   );
 }
