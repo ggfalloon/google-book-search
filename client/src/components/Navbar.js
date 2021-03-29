@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
     return (
-        <nav className="navbar fixed-top navbar-expand-md navbar-dark">
+        <nav className="navbar navbar-expand-lg navbar-expand-md navbar-dark bg-dark">
             <div className="container-fluid">
 
                 <Link className="navbar-brand left-nav" to="/">Google Books</Link>
@@ -15,15 +15,15 @@ function Navbar() {
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item active">
                             <Link to="/search"
                                 className={
                                     window.location.pathname === "/search"
                                         ? "nav-link active"
                                         : "nav-link"} >Search</Link>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item active">
                             <Link to="/saved"
                                 className={window.location.pathname === "/saved" ? "nav-link active" : "nav-link"}>Saved Books</Link>
                         </li>
