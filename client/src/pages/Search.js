@@ -53,26 +53,27 @@ function searchPage() {
                         />
                         <FormBtn>Search</FormBtn>
                     </form>
+                    {
+                        results.map((book) => {
+                            return <div>
+                                <h3>{data.volumeInfo.title} </h3>
+                                <h4>{book.volumeInfo.authors}</h4>
+                                <ViewBtn><a href={book.volumeInfo.infoLink} target="_blank" rel="noreferrer"></a></ViewBtn>
+                                <FormBtn onSubmit={handleFormSave}>Save</FormBtn>
+
+                                <div className="row">
+                                    <img src={book.volumeInfo.imageLinks.thumbnail}
+                                        alt="book"
+                                        className="img-thumbnail img-thumb" />
+                                    <p>{book.volumeInfo.description}</p>
+                                </div>
+                            </div >
+                        })
+                    }
+
                 </div>
             </div>
-
-            {
-                results.map(book => (
-                    
-                <h3>{book.volumeInfo.title} </h3>
-                <h4>{book.volumeInfo.authors}</h4>
-                <ViewBtn><a href={book.volumeInfo.infoLink} target="_blank" rel="noreferrer"></a></ViewBtn>
-                <FormBtn onSubmit={handleFormSave}>Save</FormBtn>
-
-                <div className="row">
-                    <img src={book.volumeInfo.imageLinks.thumbnail}
-                        alt="book"
-                        className="img-thumbnail img-thumb" />
-                    <p>{book.volumeInfo.description}</p>
-                </div>
-                )
-            }
-        </div >
+        </div>
     );
 }
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-const APIkey = "AIzaSyDx8N3PgfYOqvLVD3um7h459tHwAg7HyMY";
+const APIkey = process.env.API_KEY;
 
 export default {
     // Gets all books
