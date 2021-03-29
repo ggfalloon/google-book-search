@@ -1,43 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import API from "../utils/API";
 import { Input, FormBtn } from "../components/SearchForm";
+import ViewBtn from "../components/ViewBtn";
 
 function searchPage() {
     // Setting our component's initial state
-    const [books, setBooks] = useState([])
-    const [formObject, setFormObject] = useState({})
+    const [book, setBook] = useState("")
+    const [formObject, setFormObject] = useState([])
+    const [results, setResults] = useState([]);
 
-    // Load all books and store them with setBooks
-    useEffect(() => {
-        loadBooks()
-    }, [])
-
-    // Loads all books and sets them to books
-    function loadBooks() {
-        API.getBooks()
-            .then(res =>
-                setBooks(res.data)
-            )
-            .catch(err => console.log(err));
-    };
-
-    // Deletes a book from the database with a given id, then reloads books from the db
-    function deleteBook(id) {
-        API.deleteBook(id)
-            .then(res => loadBooks())
-            .catch(err => console.log(err));
-    }
 
     // Handles updating component state when the user types into the input field
     function handleInputChange(event) {
-        const { name, value } = event.target;
-        setFormObject({ ...formObject, [name]: value })
+        const book = event.target.value;
+        setFormObject(book);
     };
 
-    // When the form is submitted, use the API.saveBook method to save the book data
-    // Then reload books from the database
     function handleFormSubmit(event) {
         event.preventDefault();
+        API.getBooks()
+            .then(data => {
+                setResults(data.data.items);
+            })
+    }
+
+    // When the form is submitted, use the API.saveBook method to save the book data
+
+    function handleFormSave(event) {
+        event.preventDefault();
+        console.log(book)
         API.saveBook({
             title: formObject.title,
             authors: formObject.authors,
@@ -45,33 +36,43 @@ function searchPage() {
             image: formObject.image,
             link: formObject.link
         })
-            .then(res => loadBooks())
+            .then(res => db.googlebooks)
             .catch(err => console.log(err));
 
     };
 
     return (
         <div className="container fluid">
-
             <div className="row">
                 <div className="col">
-                    <form>
+                    <form onSubmit={handleFormSubmit}>
                         <Input
-                            onChange={handleInputChange}
+                            type="text" onChange={handleInputChange}
                             name="title"
-                            placeholder="Title (required)"
+                            placeholder="Enter Book Title"
                         />
-
-                        <FormBtn
-                            disabled={!(formObject.author && formObject.title)}
-                            onClick={handleFormSubmit}
-                        >
-                            Save Book
-              </FormBtn>
+                        <FormBtn>Search</FormBtn>
                     </form>
                 </div>
             </div>
-        </div>
+
+            {
+                results.map(book => (
+                    
+                <h3>{book.volumeInfo.title} </h3>
+                <h4>{book.volumeInfo.authors}</h4>
+                <ViewBtn><a href={book.volumeInfo.infoLink} target="_blank" rel="noreferrer"></a></ViewBtn>
+                <FormBtn onSubmit={handleFormSave}>Save</FormBtn>
+
+                <div className="row">
+                    <img src={book.volumeInfo.imageLinks.thumbnail}
+                        alt="book"
+                        className="img-thumbnail img-thumb" />
+                    <p>{book.volumeInfo.description}</p>
+                </div>
+                )
+            }
+        </div >
     );
 }
 

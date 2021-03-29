@@ -1,11 +1,14 @@
 import API from "../utils/API";
 import ViewBtn from "../components/ViewBtn";
+import React, { useState, useEffect } from "react";
+
 // import DeleteBtn from "../components/DeleteBtn";
 
 function savedBooks() {
     // Setting our component's initial state
     const [books, setBooks] = useState([])
     const [formObject, setFormObject] = useState({})
+
 
     // Load all books and store them with setBooks
     useEffect(() => {
@@ -20,6 +23,7 @@ function savedBooks() {
             )
             .catch(err => console.log(err));
     };
+
 
     // Deletes a book from the database with a given id, then reloads books from the db
     function deleteBook(id) {
@@ -39,8 +43,9 @@ function savedBooks() {
                             return <div className="savedBooks" key={book._id}>
                                 <h3>{book.title} </h3>
                                 <h4>{book.author}</h4>
-                                <button><a href={book.link} target="_blank" rel="noreferrer"><span><ViewBtn /></span></a>
-                                </button>
+                                <ViewBtn><a href={book.link} target="_blank" rel="noreferrer"></a></ViewBtn>
+                                <DeleteBtn deleteBook={deleteBook}></DeleteBtn>
+
 
                                 <div className="row">
                                     <img src={book.image}
