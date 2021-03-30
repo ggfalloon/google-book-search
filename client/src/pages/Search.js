@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import API from "../utils/API";
 import { Input, FormBtn } from "../components/SearchForm";
 import ViewBtn from "../components/ViewBtn";
+import Results from "../components/Results";
 
 function searchPage() {
     // Setting our component's initial state
@@ -53,24 +54,25 @@ function searchPage() {
                         />
                         <FormBtn>Search</FormBtn>
                     </form>
-                    {
-                        results.map((book) => {
-                            return <div>
-                                <h3>{data.volumeInfo.title} </h3>
-                                <h4>{book.volumeInfo.authors}</h4>
-                                <ViewBtn><a href={book.volumeInfo.infoLink} target="_blank" rel="noreferrer"></a></ViewBtn>
-                                <FormBtn onSubmit={handleFormSave}>Save</FormBtn>
+                    <Results>
+                        {
+                            results.map((book) => {
+                                return <div>
+                                    <h3>{data.volumeInfo.title} </h3>
+                                    <h4>{book.volumeInfo.authors}</h4>
+                                    <ViewBtn><a href={book.volumeInfo.infoLink} target="_blank" rel="noreferrer"></a></ViewBtn>
+                                    <FormBtn onSubmit={handleFormSave}>Save</FormBtn>
 
-                                <div className="row">
-                                    <img src={book.volumeInfo.imageLinks.thumbnail}
-                                        alt="book"
-                                        className="img-thumbnail img-thumb" />
-                                    <p>{book.volumeInfo.description}</p>
-                                </div>
-                            </div >
-                        })
-                    }
-
+                                    <div className="row">
+                                        <img src={book.volumeInfo.imageLinks.thumbnail}
+                                            alt="book"
+                                            className="img-thumbnail img-thumb" />
+                                        <p>{book.volumeInfo.description}</p>
+                                    </div>
+                                </div >
+                            })
+                        }
+                    </Results>
                 </div>
             </div>
         </div>

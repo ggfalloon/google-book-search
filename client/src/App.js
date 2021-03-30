@@ -12,7 +12,7 @@ function App() {
         <Navbar />
         <Jumbotron />
         <Switch>
-          <Route exact path={"/search"}>
+          <Route exact path={"/", "/search"}>
             <Search />
           </Route>
           <Route exact path="/saved">

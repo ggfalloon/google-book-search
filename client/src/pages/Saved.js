@@ -1,6 +1,7 @@
 import API from "../utils/API";
 import ViewBtn from "../components/ViewBtn";
 import React, { useState, useEffect } from "react";
+import Results from "../components/Results";
 
 // import DeleteBtn from "../components/DeleteBtn";
 
@@ -37,25 +38,26 @@ function savedBooks() {
         <div className="container fluid">
             <div className="row">
                 <div className="col-md-6">
+                    <Results>
+                        {
+                            books.map((book) => {
+                                return <div className="savedBooks" key={book._id}>
+                                    <h3>{book.title} </h3>
+                                    <h4>{book.author}</h4>
+                                    <ViewBtn><a href={book.link} target="_blank" rel="noreferrer"></a></ViewBtn>
+                                    <DeleteBtn deleteBook={deleteBook}></DeleteBtn>
 
-                    {
-                        books.map((book) => {
-                            return <div className="savedBooks" key={book._id}>
-                                <h3>{book.title} </h3>
-                                <h4>{book.author}</h4>
-                                <ViewBtn><a href={book.link} target="_blank" rel="noreferrer"></a></ViewBtn>
-                                <DeleteBtn deleteBook={deleteBook}></DeleteBtn>
 
-
-                                <div className="row">
-                                    <img src={book.image}
-                                        alt="book"
-                                        className="img-thumbnail img-thumb" />
-                                    <p>{book.description}</p>
+                                    <div className="row">
+                                        <img src={book.image}
+                                            alt="book"
+                                            className="img-thumbnail img-thumb" />
+                                        <p>{book.description}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        })
-                    }
+                            })
+                        }
+                    </Results>
                 </div>
             </div>
         </div>
