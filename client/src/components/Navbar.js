@@ -7,7 +7,7 @@ function Navbar() {
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
             <div className="container-fluid">
 
-                <Link className="navbar-brand left-nav" to="/">Google Books</Link>
+                <Link className="navbar-brand left-nav" to="/search">Google Books</Link>
 
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
