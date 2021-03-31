@@ -24,7 +24,8 @@ An search and save application built with React to save your favorite google boo
 
 URL - https://github.com/ggfalloon/google-book-search
 
-Click on the Saved or Search links to save your favorite books and search for new ones.
+![googlebooks](https://user-images.githubusercontent.com/71281652/113092875-75b6ff00-91b4-11eb-9ac3-1836a728ed90.png)
+On the Search page, you can type in your topic or title and see the books available.
 
 ## Resources
 
